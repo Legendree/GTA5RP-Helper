@@ -1,0 +1,70 @@
+http://gta5rp.com/login?_ajax=0&act=do_login&from=login&hash=63d09e3513ec548120&name=netsa&needNewBar=1&password=den2412&remember=0&to=
+
+
+dart: 48787753d8350bf384
+chrome: 63d09e3513ec548120
+new_dart: e58d2fa4d351421f4e
+
+    final parser = PageParser(url: 'https://gta5rp.com/login');
+    if(!(await parser.parseData())) return;
+
+    final title = parser.document().getElementsByTagName('button');
+
+    print(title[5].outerHtml);
+    /*
+var i = 0;
+    title.forEach((f) => {
+      print(f.text + ' ' + i.toString()),
+      i += 1
+    });
+    */
+
+
+output: 
+<button class="g-btn g-form-submit" type="button" onclick="Login.doLogin(this, '48787753d8350bf384', '');" id="login_47957a5e81ad">Войти</button>
+
+         final stats = await client.post('http://gta5rp.com/login',
+         body: {
+           '_ajax' : '0',
+           'act' : 'do_login',
+           'from' : 'login',
+           'hash' : '48787753d8350bf384',
+           'name' : 'netsa',
+           'needNewBar' : '1',
+           'password' : 'den2412',
+           'remember' : '0',
+           'to' : ''
+         },
+         headers: {
+           'Sec-Fetch-Dest' : 'empty',
+           'X-Requested-With' : 'XMLHttpRequest',
+           'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
+           'DNT' : '1',
+           'Content-Type' : 'application/x-www-form-urlencoded',
+           'Accept' : '*/*'
+         });
+
+
+
+    var client = http.Client();
+    try {
+      var response = await client.get(
+          'http://gta5rp.com/login?_ajax=0&act=do_login&from=login&hash=48787753d8350bf384&name=netsa&needNewBar=1&password=den2412&remember=0&to=',
+          headers: {
+            'DNT' : '1',
+            'Upgrade-Insecure-Requests' : '1',
+            'User-Agent' : 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36',
+            'Accept' : 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9'
+          });
+
+      print('-------------------REQUEST------------------------');
+      response.request.headers.forEach((i, j) {
+        print(i + " : " + j);
+      });
+      print('-------------------RESPONSE------------------------');
+            response.headers.forEach((i, j) {
+        print(i + " : " + j);
+      });
+    } catch (e) {
+      print(e);
+    }
