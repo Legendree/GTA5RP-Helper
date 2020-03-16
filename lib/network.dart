@@ -14,7 +14,8 @@ class Network {
     } catch (e) {
       print(e);
       if (_response.statusCode != 200) {
-        print('Error: response status code is not successful - (200)');
+        final code = _response.statusCode;
+        print('Error: response status code is not successful - $code');
       }
     }
   }
