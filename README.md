@@ -2,7 +2,7 @@
 
 Создано для игроков проекта [GTA5RP](http://gta5rp.com/)
 
-![Application](https://raw.githubusercontent.com/Legendree/GTA5RP-Helper/master/image_readme.png?token=ACSM3PQ65HXQFRU6PZSAQI26N7OVY)
+![Application](https://raw.githubusercontent.com/Legendree/GTA5RP-Helper/master/image_readme.png?token=ACSM3PTT2PS5HZ6SGICC7226N7PE4)
 
 ## Что это такое?
 
