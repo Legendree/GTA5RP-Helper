@@ -19,10 +19,14 @@ class _MainScreenState extends State<MainScreen> {
   Timer timer;
   int _totalOnline = 0;
 
+  String serverListUrl;
+
   @override
   void initState() {
     super.initState();
-    _getData();
+    setState(() {
+      serverListUrl = 'https://cdn.rage.mp/master/';
+    });
     timer = Timer.periodic(Duration(seconds: 3), (t) => _getData());
   }
 
@@ -66,11 +70,38 @@ class _MainScreenState extends State<MainScreen> {
                   builder: (context, snapshot) {
                     if(snapshot.data == null) {
                       return Container(
-                        child: CircularProgressIndicator(
-                          valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 100),
+                          child: CircularProgressIndicator(
+                            valueColor: new AlwaysStoppedAnimation<Color>(Colors.white),
+                          ),
                         ),
                       );
                     }
+                    else if(snapshot.hasError) {
+                      return ListView.separated(
+                          separatorBuilder: (context, index) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 8),
+                              child: Divider(
+                                color: Color(0xff4F4F4F),
+                              ),
+                            );
+                          },
+                          shrinkWrap: true,
+                          itemCount: 5,
+                          itemBuilder: (context, index) {
+                            return ServerCard(
+                                serverName: _getServerName(index),
+                                data: ServerData(
+                                  players: 0,
+                                  maxPlayers: 2400,
+                                  lang: 'null'
+                                ));
+                          });
+                    }
+                    else {       
                       return ListView.separated(
                           separatorBuilder: (context, index) {
                             return Padding(
@@ -87,7 +118,8 @@ class _MainScreenState extends State<MainScreen> {
                             return ServerCard(
                                 serverName: _getServerName(index),
                                 data: snapshot.data[index]);
-                          });             
+                          });
+                    }
                   }),
               SizedBox(height: 30),
               Text('ОБЩИЙ ОНЛАЙН ' + _totalOnline.toString(),
@@ -123,7 +155,7 @@ class _MainScreenState extends State<MainScreen> {
   Future<List<ServerData>> _getServerList() async {
     int calculatedOnline = 0;
     try {
-      _network = Network(url: 'https://cdn.rage.mp/master/');
+      _network = Network(url: serverListUrl);
       await _network.parseInfo();
       final data = await _network.getJsonData();
       final serversData = [
@@ -153,7 +185,7 @@ class _MainScreenState extends State<MainScreen> {
   Future<void> _getData() async {
     int calculatedOnline = 0;
     try {
-      _network = Network(url: 'https://cdn.rage.mp/master/');
+      _network = Network(url: serverListUrl);
       await _network.parseInfo();
       final data = await _network.getJsonData();
       final serversData = [

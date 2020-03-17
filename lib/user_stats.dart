@@ -10,10 +10,13 @@ class UserStatsPage extends StatefulWidget {
 }
 
 class _UserStatsPageState extends State<UserStatsPage> {
+
   http.Client client;
+
   @override
   void initState() {
     super.initState();
+    client = new http.Client();
   }
 
   @override
@@ -43,27 +46,37 @@ class _UserStatsPageState extends State<UserStatsPage> {
   }
 
   _getUserStats() async {
-    client = new http.Client();
     try {
       String _accessKey = await _getGTA5RPKey(client);
       print('----------------------------------------');
       print(_accessKey);
       print('----------------------------------------');
-      final response = await client.get(
-          'https://gta5rp.com/login?_ajax=0&act=do_login&from=login&hash=$_accessKey&name=netsa&needNewBar=1&password=den2412&remember=0&to=',
-          headers: Statics.loginHeaders);
+         
+      final url = 'https://gta5rp.com/login?_ajax=0&act=do_login&from=login&hash=' + _accessKey + '&name=netsa&needNewBar=1&password=den2412&remember=0&to=';
+      print(url);
+      final login = await client.post(url, headers: Statics.loginHeaders);
+      print('-------------RESPONSE LOCATION--------------');
+      print(login.headers['location']);
+      print('--------------------------------------------');
+
+      final safeLogin = await client.post(login.headers['location'], headers: Statics.loginHeaders);
 
       print('-------------RESPONSE LOCATION--------------');
-      print(response.headers['location']);
+      print(safeLogin.headers['location']);
       print('--------------------------------------------');
-      print(response.body);
+
+      final stats = await client.get(safeLogin.headers['location'], headers: Statics.loginHeaders);
+      print('-------------RESPONSE LOCATION--------------');
+      print(stats.body);
+      print('--------------------------------------------');
+      
     } catch (e) {
       print(e);
     }
   }
 
   _getGTA5RPKey(http.Client client) async {
-    final parser = PageParser(url: 'http://gta5rp.com/stats');
+    final parser = PageParser(url: 'http://gta5rp.com/login/');
     if (!(await parser.parseData(client))) return;
     final title = parser.document().getElementsByTagName('button');
     return title[5].outerHtml.substring(80, 98);
