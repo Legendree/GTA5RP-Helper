@@ -21,7 +21,8 @@ class _UserStatsPageState extends State<UserStatsPage> {
 
   @override
   void dispose() {
-    client.close();
+    if(client != null)
+      client.close();
     super.dispose();
   }
   @override
@@ -71,14 +72,16 @@ class _UserStatsPageState extends State<UserStatsPage> {
 
       localSafeLoginHeader['Cookie'] += '; ' + _setCookie;
 
-      final stats = await client.get(safeLogin.headers['location'], headers: localSafeLoginHeader);
+      //final stats = await client.get(safeLogin.headers['location'], headers: localSafeLoginHeader);
 
-      print(stats.body);
+      final parser = PageParser(url: safeLogin.headers['location']);
+      if (!(await parser.parseData(client, localSafeLoginHeader))) return;
+      //final title = parser.document().getElementsByClassName('accountInfo__name')
+      //  .forEach((f) => print(f.text));
+      final title = parser.document().getElementsByClassName('accountInfo__name');
+        print(title[0].text.trim());
       
-      //print('-------------new cookie--------------');
-      //print(localSafeLoginHeader['Cookie']);
-      //print('--------------------------------------------');
-      
+      client.close();
     } catch (e) {
       print(e);
     }
@@ -86,7 +89,7 @@ class _UserStatsPageState extends State<UserStatsPage> {
 
   _getGTA5RPKey(http.Client client) async {
     final parser = PageParser(url: 'http://gta5rp.com/login/');
-    if (!(await parser.parseData(client))) return;
+    if (!(await parser.parseData(client, Statics.parseHeaders))) return;
     final title = parser.document().getElementsByTagName('button');
     return title[5].outerHtml.substring(80, 98);
   }
