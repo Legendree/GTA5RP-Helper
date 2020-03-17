@@ -61,14 +61,23 @@ class _UserStatsPageState extends State<UserStatsPage> {
 
       final safeLogin = await client.post(login.headers['location'], headers: Statics.loginHeaders);
 
-      print('-------------RESPONSE LOCATION--------------');
-      print(safeLogin.headers['location']);
-      print('--------------------------------------------');
+      //print('-------------RESPONSE LOCATION--------------');
+      //print(safeLogin.headers['set-cookie']);
+      //print('--------------------------------------------');
 
-      final stats = await client.get(safeLogin.headers['location'], headers: Statics.loginHeaders);
-      print('-------------RESPONSE LOCATION--------------');
+      String _setCookie = safeLogin.headers['set-cookie'].substring(0, 59);
+
+      Map<String, String> localSafeLoginHeader = Statics.loginHeaders;
+
+      localSafeLoginHeader['Cookie'] += '; ' + _setCookie;
+
+      final stats = await client.get(safeLogin.headers['location'], headers: localSafeLoginHeader);
+
       print(stats.body);
-      print('--------------------------------------------');
+      
+      //print('-------------new cookie--------------');
+      //print(localSafeLoginHeader['Cookie']);
+      //print('--------------------------------------------');
       
     } catch (e) {
       print(e);
