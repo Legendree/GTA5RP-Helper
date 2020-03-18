@@ -1,3 +1,5 @@
+enum Server { Downtown, Strawberry, Vinewood, Blackberry, Insquad, Sunrise }
+
 class Statics {
   static Map<String, String> parseHeaders = {
     //'Host': 'gta5rp.com',
@@ -31,4 +33,24 @@ class Statics {
     //'Upgrade-Insecure-Requests': '1',
     //'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.132 Safari/537.36'
   };
+
+
+  static String getServerUrl(Server server) {
+    switch (server) {
+      case Server.Blackberry:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=04&to=_lnnh2CehKNJL3N0YXRz';
+      case Server.Downtown:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=01&to=_lnnh2CehKNJL3N0YXRz';
+      case Server.Insquad:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=05&to=_lnnh2CehKNJL3N0YXRz';
+      case Server.Sunrise:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=06&to=_lnnh2CehKNJL3N0YXRz';
+      case Server.Vinewood:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=03&to=_lnnh2CehKNJL3N0YXRz';
+      case Server.Strawberry:
+        return 'https://gta5rp.com/stats?act=switch_server&sid=02&to=_lnnh2CehKNJL3N0YXRz';
+      default:
+        return 'https://gta5rp.com/stats';
+    }
+  }
 }

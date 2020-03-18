@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:gta5rp_app/login_page.dart';
 import 'package:gta5rp_app/main_screen.dart';
-import 'package:gta5rp_app/user_stats.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       initialRoute: MainScreen.id,
       routes: {
         MainScreen.id: (context) => MainScreen(),
-        UserStatsPage.id: (context) => UserStatsPage()
+        LoginPage.id: (context) => LoginPage(),    
       },
     );
   }

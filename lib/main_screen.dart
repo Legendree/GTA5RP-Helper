@@ -2,10 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:gta5rp_app/constants.dart';
+import 'package:gta5rp_app/login_page.dart';
 import 'package:gta5rp_app/network.dart';
 import 'package:gta5rp_app/server_card.dart';
 import 'package:gta5rp_app/server_data.dart';
-import 'package:gta5rp_app/user_stats.dart';
 
 class MainScreen extends StatefulWidget {
   static String id = 'main_screen';
@@ -127,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
               SizedBox(height: 15),
               RaisedButton(
                 onPressed: () async =>
-                    await Navigator.pushNamed(context, UserStatsPage.id),
+                    await Navigator.pushNamed(context, LoginPage.id),
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),

@@ -11,7 +11,8 @@ class HeaderCard extends StatelessWidget {
       padding: const EdgeInsets.all(16.0),
       child: Container(
         decoration: BoxDecoration(
-          color: Color(0xff272729)
+          color: Color(0xff272729),
+          border: Border.all(color: Colors.orange),
         ),
         width: double.infinity,
         height: 50,
