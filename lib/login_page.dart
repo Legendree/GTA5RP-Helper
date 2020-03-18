@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gta5rp_app/input_field.dart';
 import 'package:gta5rp_app/pageParser.dart';
 import 'package:gta5rp_app/statics.dart';
 import 'package:gta5rp_app/user_stats.dart';
@@ -15,6 +16,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   http.Client _client;
   bool _spinner;
+
+  String _loggin;
+  String _password;
 
   @override
   void initState() {
@@ -37,30 +41,53 @@ class _LoginPageState extends State<LoginPage> {
           progressIndicator: CircularProgressIndicator(),
       child: SafeArea(
         child: Center(
-          child: RaisedButton(
-            onPressed: () async {
-              setState(() {
-                _spinner = true;
-              });
-              final parsedDocument = await _parseStatsPage();
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          UserStatsPage(document: parsedDocument)));
-              //Navigator.pop(context, true);
-              setState(() {
-                _spinner = false;
-              });
-            },
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-              child: Text('ВОЙТИ'),
-            ),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
-            color: Color(0xff3D3D3D),
-            textColor: Colors.white,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Image.asset('images/logo.png'),
+              SizedBox(height: 40),
+              InputField(
+                    hintText: 'Логин',
+                    onChanged: (value) {
+                      _loggin = value;
+                    },
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 10),
+                  InputField(
+                    hintText: 'Пароль',
+                    isObscure: true,
+                    onChanged: (value) {
+                      _password = value;
+                    },
+                  ),
+                  SizedBox(height: 25),
+              RaisedButton(
+                onPressed: () async {
+                  setState(() {
+                    _spinner = true;
+                  });
+                  final parsedDocument = await _parseStatsPage();
+                  await Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              UserStatsPage(document: parsedDocument)));
+                  //Navigator.pop(context, true);
+                  setState(() {
+                    _spinner = false;
+                  });
+                },
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
+                  child: Text('ВОЙТИ'),
+                ),
+                shape:
+                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(32)),
+                color: Color(0xff3D3D3D),
+                textColor: Colors.white,
+              ),
+            ],
           ),
         ),
       ),

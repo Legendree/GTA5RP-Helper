@@ -131,7 +131,7 @@ class _MainScreenState extends State<MainScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(vertical: 16, horizontal: 32),
-                  child: Text('ВОЙТИ'),
+                  child: Text('ПРОДОЛЖИТЬ'),
                 ),
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32)),
