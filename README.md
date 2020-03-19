@@ -4,7 +4,7 @@
 
 
 <p align="center">
-  <img width="1121" height="746" src="https://i.imgur.com/Zew0Ux7.png">
+  <img width="1021" height="646" src="https://i.imgur.com/Zew0Ux7.png">
 </p>
 
 ## Что это такое?

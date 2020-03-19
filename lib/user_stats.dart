@@ -113,7 +113,9 @@ class _UserStatsPageState extends State<UserStatsPage> {
     var arr = genderAge[0].text.split('\n');
     var gender = arr[3].trim();
     var age = arr[7].trim();
-  
+
+    final vehicles = widget.document.getElementsByClassName('linearSlider__slides');
+      
     charactersData.add(new CharacterInfoCard(
       characterInfo: CharacterInfo(
         characterName: characterInfo[1],

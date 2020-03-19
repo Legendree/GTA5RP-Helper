@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'GTA5RP',
       theme: ThemeData(
+        accentColor: Color(0xffF3C341),
         scaffoldBackgroundColor: Color(0xff181818),
         textTheme: TextTheme()
       ),
