@@ -4,7 +4,7 @@
 
 
 <p align="center">
-  <img width="372" height="744" src="https://i.imgur.com/XuyXCy8.png">
+  <img width="1121" height="746" src="https://i.imgur.com/Zew0Ux7.png">
 </p>
 
 ## Что это такое?
@@ -30,5 +30,10 @@
     - Знакомства
     - Все навыки
 ```
+
+<p align="center">
+  <img width="388" height="812" src="https://i.imgur.com/shq0ZE8.gif">
+</p>
+
 
 Создатель: [Legendre](https://github.com/Legendree)
