@@ -104,7 +104,7 @@ class _LoginPageState extends State<LoginPage> {
       final url =
           'https://gta5rp.com/login?_ajax=0&act=do_login&from=login&hash=' +
               _accessKey +
-              '&name=netsa&needNewBar=1&password=den2412&remember=0&to=';
+              '&name=<USERNAME>&needNewBar=1&password=<PASSWORD>&remember=0&to=';
       print(url);
       final login = await _client.post(url, headers: Statics.loginHeaders);
       print('-------------RESPONSE LOCATION--------------');
